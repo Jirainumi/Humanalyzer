@@ -4,7 +4,7 @@ import mediapipe as mp
 from matplotlib.colors import rgb2hex
 import os
 from PIL import Image, ImageDraw, ImageFont
-import datetime
+from datetime import datetime
 import colorsys
 
 
@@ -56,7 +56,7 @@ class FaceAnalyzer:
         }
 
         # Analiz tarihi ve kullanıcı bilgisi
-        self.current_date = datetime.datetime.now()
+        self.current_date = datetime.now()
         self.current_user = "admin"
 
     def rgb_to_hsv(self, rgb):

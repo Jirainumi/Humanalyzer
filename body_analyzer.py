@@ -3,7 +3,7 @@ import numpy as np
 import mediapipe as mp
 from PIL import Image, ImageDraw, ImageFont
 import os
-import datetime
+from datetime import datetime
 
 
 class BodyAnalyzer:
@@ -28,8 +28,8 @@ class BodyAnalyzer:
         }
 
         # Analiz tarihi ve kullanıcı bilgisi
-        self.current_date = datetime.datetime.now()
-        self.current_user = "Jirainumi"
+        self.current_date = datetime.now()
+        self.current_user = "Admin"
 
     def calculate_body_ratios(self, landmarks, image_shape):
         """

@@ -420,7 +420,8 @@ class FaceAnalyzeApp:
 
                     # Analiz zamanını kontrol et
                     current_time = datetime.now()
-                    if current_time - last_analysis_time >= self.capture_analyzer.analysis_interval:
+                    time_diff = (current_time - last_analysis_time).total_seconds()  # saniye cinsinden float
+                    if time_diff >= self.capture_analyzer.analysis_interval:
                         # Kareyi analiz et
                         analysis_result = self.capture_analyzer.analyze_frame(frame)
                         if analysis_result:
@@ -440,7 +441,7 @@ class FaceAnalyzeApp:
                     if key == ord('q'):
                         break
                     elif key == ord('s'):  # 's' tuşu ile anlık görüntü alma
-                        timestamp = datetime.date().strftime("%Y/%m/%d %H:%M:%S")
+                        timestamp = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
                         snapshot_path = os.path.join(self.results_dir, f"snapshot_{timestamp}.jpg")
                         cv2.imwrite(snapshot_path, frame)
                         print(f"Anlık görüntü kaydedildi: {snapshot_path}")
@@ -514,7 +515,7 @@ class FaceAnalyzeApp:
                                 self.audio_handler.speak_text("Görüntü alınıyor ve analiz ediliyor.")
 
                             # Anlık görüntü al ve analiz et
-                            timestamp = datetime.date().strftime("%Y%m%d%H%M%S")
+                            timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
                             snapshot_path = os.path.join(self.results_dir, f"snapshot_{timestamp}.jpg")
 
                             # Görüntüyü kaydet
@@ -569,7 +570,7 @@ class FaceAnalyzeApp:
                         if self.voice_mode:
                             self.audio_handler.speak_text("Görüntü alınıyor ve analiz ediliyor.")
 
-                        timestamp = datetime.date().strftime("%Y%m%d%H%M%S")
+                        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
                         snapshot_path = os.path.join(self.results_dir, f"snapshot_{timestamp}.jpg")
 
                         # Görüntüyü kaydet

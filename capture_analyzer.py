@@ -2,10 +2,10 @@ import cv2
 import numpy as np
 import mediapipe as mp
 from PIL import Image, ImageDraw, ImageFont
-import datetime
+from datetime import datetime
 import os
 import threading
-import time
+from time import time
 
 
 class CaptureAnalyzer:
@@ -35,7 +35,7 @@ class CaptureAnalyzer:
         self.show_landmarks = True
         self.show_results = True
         self.analysis_interval = 0.5  # Analiz sıklığı (saniye)
-        self.last_analysis_time = 0
+        self.last_analysis_time = time()
         self.current_results = None
 
         # Font ayarları
@@ -43,8 +43,8 @@ class CaptureAnalyzer:
         self.load_font()
 
         # Analiz tarihi ve kullanıcı bilgisi
-        self.current_date = datetime.datetime.now()
-        self.current_user = "Jirainumi"
+        self.current_date = datetime.now()
+        self.current_user = "Admin"
 
     def load_font(self):
         """Türkçe karakter desteği için font yükler"""
@@ -278,7 +278,7 @@ class CaptureAnalyzer:
             draw.text((margin, y_pos), f"Yüz Şekli: {yuz_sekli}", font=self.font, fill=black_color)
 
             # Alt bilgi - tarih ve kullanıcı
-            formatted_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            formatted_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             info_text = "Canlı Analiz"
             info_width = draw.textlength(info_text, font=self.font) if hasattr(draw, "textlength") else \
             self.font.getsize(info_text)[0]
@@ -318,7 +318,7 @@ class CaptureAnalyzer:
                     break
 
                 # Analiz zamanını kontrol et
-                current_time = time.time()
+                current_time = time()
                 if current_time - self.last_analysis_time >= self.analysis_interval:
                     # Kareyi analiz et
                     analysis_result = self.analyze_frame(frame)
